@@ -1,18 +1,12 @@
 import json
 import time
-import paho.mqtt.client as mqtt
+import requests
 
 from igrill import IGrillV2Peripheral
 
 ADDRESS = 'D4:81:CA:23:67:A1'
-mqtt_server = "mqtt"
-# DATA_FILE = '/tmp/igrill.json'
 INTERVAL = 15
-
-# MQTT Section
-client = mqtt.Client()
-client.connect(mqtt_server, 1883, 60)
-client.loop_start()
+URL = 'https://your-api/bbq/'
 
 if __name__ == '__main__':
  periph = IGrillV2Peripheral(ADDRESS)
@@ -20,20 +14,26 @@ if __name__ == '__main__':
   temperature=periph.read_temperature()
   # Probe 1
   if temperature[1] != 63536.0:
-   client.publish("bbq/probe1", temperature[1])
+   mytemp = {'probe1': temperature[1]}
+   requests.post(url, data = mytemp)
 
   # Probe 2
   if temperature[2] != 63536.0:
-   client.publish("bbq/probe2", temperature[2])
+   mytemp = {'probe1': temperature[2]}
+   requests.post(url, data = mytemp)
 
   # Probe 3
   if temperature[3] != 63536.0:
-   client.publish("bbq/probe3", temperature[3])
+   mytemp = {'probe1': temperature[3]}
+   requests.post(url, data = mytemp)
 
   # Probe 4
   if temperature[4] != 63536.0:
-   client.publish("bbq/probe4", temperature[4])
-
-  client.publish("bbq/battery", periph.read_battery())
+   mytemp = {'probe1': temperature[4]}
+   requests.post(url, data = mytemp)
+   
+  # Battery
+  mybattery = {'batter': periph.read_battery()}
+  requests.post(url, data = mytemp)
 
   time.sleep(INTERVAL)
