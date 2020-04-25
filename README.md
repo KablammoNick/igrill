@@ -5,16 +5,17 @@ Monitor your iGrill_v2 (with a Raspberry Pi 1/2/3) - and an forward it to an mqt
 ### Hardware
 * iGrill2 Device (and at least one probe) - [Weber Homepage - DE](http://www.weber.com/DE/de/zubehoer/werkzeuge/-igrill/7221.html)
 * A bluetooth enabled computer - preferable a raspberry pi
-* A mqtt server as message receiver
+* A HTTP Api Server who is capable of receiving POST-requests
 
 ### Software
 * [bluepy](https://github.com/IanHarvey/bluepy)
-* [paho mqtt](https://pypi.python.org/pypi/paho-mqtt/1.1)
+* [requests](https://pypi.org/project/requests/)
 * [pycrypto](https://pypi.python.org/pypi/pycrypto/2.6.1)
 
 ## Installation
 1. clone this repo
 1. install required modules
+1. set the URL of your API
 1. change the `ADDRESS` to the address of your iGrill - to find it out just run `hcitool lescan`
 1. start application `python monitor_igrill_v2.py`
 1. enjoy
