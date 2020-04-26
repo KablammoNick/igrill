@@ -6,7 +6,7 @@ from igrill import IGrillV2Peripheral
 
 ADDRESS = 'D4:81:CA:23:67:A1'
 INTERVAL = 15
-URL = 'https://your-api/bbq/'
+url = 'https://your-api/bbq/'
 
 if __name__ == '__main__':
  periph = IGrillV2Peripheral(ADDRESS)
@@ -34,6 +34,6 @@ if __name__ == '__main__':
    
   # Battery
   mybattery = {'batter': periph.read_battery()}
-  requests.post(url, data = mytemp)
+  requests.post(url, data = mybattery)
 
   time.sleep(INTERVAL)
